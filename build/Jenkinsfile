@@ -1,0 +1,27 @@
+pipeline {
+    agent any
+
+    tools {
+        maven 'maven3'
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'main', url: 'https://github.com/pushwanthdharavath/examplemaven.git'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                bat '"C:\\Program Files\\maven\\bin\\mvn" clean package'
+            }
+        }
+
+        stage('Archive') {
+            steps {
+                archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
+            }
+        }
+    }
+}
