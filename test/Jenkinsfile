@@ -1,0 +1,21 @@
+pipeline {
+    agent any
+
+    tools {
+        maven 'maven3'
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'main', url: 'https://github.com/pushwanthdharavath/examplemaven.git'
+            }
+        }
+
+        stage('Run Tests') {
+            steps {
+                bat '"C:\\Program Files\\maven\\bin\\mvn" test'
+            }
+        }
+    }
+}
