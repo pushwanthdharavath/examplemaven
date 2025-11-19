@@ -1,6 +1,14 @@
 pipeline {
     agent any
 
+    tools {
+        maven 'maven3'
+    }
+
+    environment {
+        PATH = "C:\\Program Files\\maven\\bin;${env.PATH}"
+    }
+
     stages {
         stage('Checkout') {
             steps {
@@ -10,7 +18,7 @@ pipeline {
 
         stage('Build') {
             steps {
-                bat 'mvn clean install'
+                bat '"C:\\Program Files\\maven\\bin\\mvn" clean install'
             }
         }
     }
